@@ -175,24 +175,6 @@ void loop() {  //runs about 60 times per second
 //-----------------------------FFT Function----------------------------------------------//
 
 void FFT(int in[], int N, float Frequency) {
-  /*
-Code to perform FFT on arduino,
-setup:
-paste sine_data [91] at top of program [global variable], paste FFT function at end of program
-Term:
-1. in[]     : Data array,
-2. N        : Number of sample (recommended sample size 2,4,8,16,32,64,128...)
-3. Frequency: sampling frequency required as input (Hz)
-
-If sample size is not in power of 2 it will be clipped to lower side of number.
-i.e, for 150 number of samples, code will consider first 128 sample, remaining sample  will be omitted.
-For Arduino nano, FFT of more than 128 sample not possible due to mamory limitation (64 recomended)
-For higher Number of sample may arise Mamory related issue,
-Code by ABHILASH
-Contact: abhilashpatel121@gmail.com
-Documentation:https://www.instructables.com/member/abhilash_patel/instructables/
-2/3/2021: change data type of N from float to int for >=256 samples
-*/
 
   unsigned int data[13] = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
   int a, c1, f, o, x;
@@ -257,15 +239,6 @@ Documentation:https://www.instructables.com/member/abhilash_patel/instructables/
     }
   }
 
-  /*
-for(int i=0;i<data[o];i++)
-{
-Serial.print(out_r[i]);
-Serial.print("\t");                                     // un comment to print RAW o/p
-Serial.print(out_im[i]); Serial.println("i");
-}
-*/
-
 
   //---> here onward out_r contains amplitude and our_in conntains frequency (Hz)
   for (int i = 0; i < data[o - 1]; i++)  // getting amplitude from complex number
@@ -282,12 +255,6 @@ Serial.print(out_im[i]); Serial.println("i");
     if (i > 7 && i <= 12) amplitudes[5] += (int)out_r[i];
     if (i > 12 && i <= 19) amplitudes[6] += (int)out_r[i];
     if (i > 19) amplitudes[7] += (int)out_r[i];
-
-    // Serial.print(out_im[i]);
-    // Serial.print("Hz");
-    // Serial.print("\t");  // un comment to print freuency bin
-    // Serial.println(out_r[i]);
-    //Serial.println(i);
   }
 }
 
